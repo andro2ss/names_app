@@ -1,11 +1,12 @@
 import './App.css';
+import AppBarHeader from "./Components/Header/AppBar";
 
 function App() {
-  return (
-    <>
-    Test owo
-    </>
-  );
+    return (
+        <>
+            <AppBarHeader/>
+        </>
+    );
 }
 
 export default App;
