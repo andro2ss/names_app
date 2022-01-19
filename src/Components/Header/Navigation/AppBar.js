@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import Logo from 'src/Img/logo.png'
+import MainLogo from "../MainLogo/MainLogo";
 
 const pages = ['Strona główna', 'Ilu masz imienników', 'Najpopularniejsze imiona', 'Generator imion dla dzieci'];
 
@@ -34,7 +34,7 @@ const AppBarHeader = () => {
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        LOGO
+                        <MainLogo />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -81,7 +81,7 @@ const AppBarHeader = () => {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
                     >
-                        <img src={Logo} alt="Logo Names Info"/>
+                        <MainLogo/>
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (

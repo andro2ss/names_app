@@ -1,10 +1,10 @@
 import './App.css';
-import AppBarHeader from "./Components/Header/AppBar";
+import AppBarHeader from "./Components/Header/Navigation/AppBar";
 
 function App() {
     return (
         <>
-            <AppBarHeader/>
+            <AppBarHeader />
         </>
     );
 }
