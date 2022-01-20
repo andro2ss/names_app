@@ -2,7 +2,7 @@ import './App.css';
 import AppBarHeader from "./Components/Header/Navigation/AppBar";
 import {Routes, Route} from "react-router-dom";
 import Home from "./Components/Body/Home";
-import TopNames from "./Components/Body/TopNames";
+import TopNames from "./Components/Body/TopNames/TopNames";
 import YourName from "./Components/Body/YourName";
 import GenerateKidName from "./Components/Body/GenerateKidName";
 import Container from '@mui/material/Container';
