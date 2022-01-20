@@ -1,10 +1,29 @@
 import './App.css';
 import AppBarHeader from "./Components/Header/Navigation/AppBar";
+import {Routes, Route} from "react-router-dom";
+import Home from "./Components/Body/Home/Home";
+import TopNames from "./Components/Body/TopNames/TopNames";
+import YourName from "./Components/Body/YourName/YourName";
+import GenerateKidName from "./Components/Body/GenerateKidName/GenerateKidName";
+import Container from '@mui/material/Container';
+
 
 function App() {
     return (
         <>
-            <AppBarHeader />
+            <header>
+                <AppBarHeader/>
+            </header>
+            <main>
+                <Container fixed>
+                    <Routes>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/Twojeimie" element={<YourName/>}/>
+                        <Route path="/Najpopularniejszeimiona" element={<TopNames/>}/>
+                        <Route path="/Generatorimiondladzieci" element={<GenerateKidName/>}/>
+                    </Routes>
+                </Container>
+            </main>
         </>
     );
 }

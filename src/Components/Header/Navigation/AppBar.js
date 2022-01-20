@@ -10,8 +10,10 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import MainLogo from "../MainLogo/MainLogo";
+import {Link} from "react-router-dom";
+import uniId from "../../HelpFunction/UniqeID";
 
-const pages = ['Strona główna', 'Ilu masz imienników', 'Najpopularniejsze imiona', 'Generator imion dla dzieci'];
+const pages = ['Strona główna', 'Twoje imie', 'Najpopularniejsze imiona', 'Generator imion dla dzieci'];
 
 const AppBarHeader = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -32,12 +34,12 @@ const AppBarHeader = () => {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                        sx={{mr: 2, display: {xs: 'none', md: 'flex'}}}
                     >
-                        <MainLogo />
+                        <MainLogo/>
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -46,7 +48,7 @@ const AppBarHeader = () => {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
                         <Menu
                             id="menu-appbar"
@@ -63,14 +65,19 @@ const AppBarHeader = () => {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: {xs: 'block', md: 'none'},
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
+                            {pages.map((page) =>
+                                (
+                                    <MenuItem key={uniId()} onClick={() => handleCloseNavMenu({page})}>
+                                        <Link
+                                            to={(page.replace(/\s+/g, '') === "Stronagłówna") ? "/" : page.replace(/\s+/g, '')}>
+                                            <Typography textAlign="center">{page}</Typography>
+                                        </Link>
+                                    </MenuItem>
+                                )
+                            )}
                         </Menu>
                     </Box>
 
@@ -79,19 +86,20 @@ const AppBarHeader = () => {
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+                        sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}
                     >
                         <MainLogo/>
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                         {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
+                            <Link key={uniId()} to={(page.replace(/\s+/g, '') === "Stronagłówna") ? "/" : page.replace(/\s+/g, '')}>
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{my: 2, color: 'white', display: 'block'}}
+                                >
+                                    {page}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
 

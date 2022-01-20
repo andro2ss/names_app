@@ -1,0 +1,29 @@
+import React, {useState} from 'react';
+import "./YourName.css"
+import * as PropTypes from "prop-types";
+import {YourNameForm} from "./Items/YourNameForm";
+import {YourNameStack} from "./Items/YourNameStack";
+
+YourNameForm.propTypes = {
+    onSubmit: PropTypes.func,
+    value: PropTypes.string,
+    onChange: PropTypes.func
+};
+
+function YourName() {
+        const [name, setName] = useState("")
+
+    return (
+        <>
+            <div className="yourName">
+                <h2>Twoje imię</h2>
+                <div className="yourName__container">
+                    <YourNameForm name={name} setName={setName}/>
+                    <YourNameStack/>
+                </div>
+            </div>
+        </>
+    );
+}
+
+export default YourName;
