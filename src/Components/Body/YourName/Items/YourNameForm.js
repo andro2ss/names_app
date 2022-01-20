@@ -10,7 +10,6 @@ import Button from "@mui/material/Button";
 import React from "react";
 
 export function YourNameForm({name, setName}) {
-    const Item = drawItem();
 
     const handleChange = (event) => {
         setName(event.target.value);
