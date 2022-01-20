@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import MainLogo from "../MainLogo/MainLogo";
+import { Link } from "react-router-dom";
 
 const pages = ['Strona główna', 'Ilu masz imienników', 'Najpopularniejsze imiona', 'Generator imion dla dzieci'];
 
@@ -67,8 +68,10 @@ const AppBarHeader = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                <MenuItem key={page} onClick={()=> handleCloseNavMenu({page})}>
+                                    <Link to ={(page.replace(/\s+/g, '') === "Stronagłówna") ? "/" : page.replace(/\s+/g, '')}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
