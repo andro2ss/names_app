@@ -3,6 +3,8 @@ import AppBarHeader from "./Components/Header/Navigation/AppBar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Components/Body/Home";
 import TopNames from "./Components/Body/TopNames";
+import YourName from "./Components/Body/YourName";
+import GenerateKidName from "./Components/Body/GenerateKidName";
 
 function App() {
     return (
@@ -13,7 +15,10 @@ function App() {
                 <main>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
+                        <Route path="/Twojeimie" element={<YourName/>}/>
                         <Route path="/Najpopularniejszeimiona" element={<TopNames/>}/>
+                        <Route path="/Generatorimiondladzieci" element={<GenerateKidName/>}/>
+
                     </Routes>
                 </main>
         </>
