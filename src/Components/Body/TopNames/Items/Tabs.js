@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import EnhancedTable from "./Table";
+import BasicTable from "./Table";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -62,10 +63,10 @@ export default function VerticalTabs() {
                 <Tab label="Żeńskie" {...a11yProps(1)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <EnhancedTable/>
+                <BasicTable/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-               <EnhancedTable/>
+               <BasicTable/>
             </TabPanel>
         </Box>
     );
