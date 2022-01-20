@@ -14,14 +14,12 @@ export function YourNameForm({name, setName}) {
 
     const handleChange = (event) => {
         setName(event.target.value);
-        event.preventDefault();
-
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
     }
-    return <Item className="yourName__form">
+    return <div className="yourName__form">
         <Box component="form"
              sx={{
                  display: "flex",
@@ -56,5 +54,5 @@ export function YourNameForm({name, setName}) {
             </FormControl>
             <Button variant="outlined" type="submit">Gotowe</Button>
         </Box>
-    </Item>;
+    </div>;
 }
