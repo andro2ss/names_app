@@ -1,10 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 
 function Home(props) {
     return (
-        <Container fixed>
             <Box sx={{bgcolor: '#cfe8fc', height: '100%'}}>
                 <h1>Names Info</h1>
                 <hr/>
@@ -17,7 +15,7 @@ function Home(props) {
                 </ul>
                 <p>Zapraszam do Zabawy</p>
             </Box>
-        </Container>
+
     );
 }
 
