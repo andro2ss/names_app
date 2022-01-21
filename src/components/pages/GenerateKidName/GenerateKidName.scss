@@ -1,0 +1,21 @@
+.generateKidName {
+
+  .generateKidName__container {
+    display: flex;
+    column-gap: 100px;
+    justify-content: space-between;
+
+    .generateKidName__table {
+      max-width: 50vw;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 900px) {
+  /* For mobile phones: */
+  .generateKidName__container {
+    row-gap: 30px;
+    flex-direction: column;
+  }
+}

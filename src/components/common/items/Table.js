@@ -7,51 +7,98 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { createDataTopNamesTable } from "../../functions/CreateDataTopNamesTable";
+import { createTableData } from "../../functions/CreateTableData";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import TableFooter from "@mui/material/TableFooter";
+import TablePagination from "@mui/material/TablePagination";
+import IconButton from "@mui/material/IconButton";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 export default function BasicTable() {
   const [sortTable, setSortTable] = useState("quantityDown");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const rows = [
-    createDataTopNamesTable("Frozen yoghurt", 159, 6.0),
-    createDataTopNamesTable("Ice cream sandwich", 237, 9.0),
-    createDataTopNamesTable("Eclair", 262, 16.0),
-    createDataTopNamesTable("Cupcake", 305, 3.7),
-    createDataTopNamesTable("Gingerbread", 356, 16.0),
-  ];
+  const rows = [];
 
   useEffect(() => {
     drawTable();
-  }, [sortTable]);
+  }, [sortTable, page, rowsPerPage]);
 
   function drawTable() {
-    return rows
-      .sort((a, b) => {
-        if (sortTable === "quantityUp") {
-          return a.nameQuantity - b.nameQuantity;
-        } else if (sortTable === "quantityDown") {
-          return b.nameQuantity - a.nameQuantity;
-        } else if (sortTable === "percentageUp") {
-          return a.namePercentage - b.namePercentage;
-        } else if (sortTable === "percentageDown") {
-          return b.namePercentage - a.namePercentage;
-        }
-        return 0;
-      })
-      .map((row) => (
-        <TableRow
-          key={row.name}
-          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            {row.name}
-          </TableCell>
-          <TableCell align="right">{row.nameQuantity}</TableCell>
-          <TableCell align="right">{row.namePercentage}</TableCell>
-        </TableRow>
-      ));
+    const drawBody = () => {
+      return (
+        <TableBody>
+          {rows
+            .sort((a, b) => {
+              if (sortTable === "quantityUp") {
+                return a.nameQuantity - b.nameQuantity;
+              } else if (sortTable === "quantityDown") {
+                return b.nameQuantity - a.nameQuantity;
+              } else if (sortTable === "percentageUp") {
+                return a.namePercentage - b.namePercentage;
+              } else if (sortTable === "percentageDown") {
+                return b.namePercentage - a.namePercentage;
+              }
+              return 0;
+            })
+            .filter((row, index) => {
+              return (
+                index >= page * rowsPerPage &&
+                index < page * rowsPerPage + rowsPerPage
+              );
+            })
+            .map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.nameQuantity}</TableCell>
+                <TableCell align="right">{row.namePercentage}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      );
+    };
+    const drawFooter = () => {
+      return (
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 20]}
+              colSpan={3}
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              SelectProps={{
+                inputProps: {
+                  "aria-label": "rows per page",
+                },
+                native: true,
+              }}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
+            />
+          </TableRow>
+        </TableFooter>
+      );
+    };
+    return (
+      <>
+        {drawBody()}
+        {drawFooter()}
+      </>
+    );
   }
 
   function sortQuantity() {
@@ -72,6 +119,78 @@ export default function BasicTable() {
     } else {
       setSortTable("percentageDown");
     }
+  }
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+    console.log(page);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  function TablePaginationActions(props) {
+    const theme = useTheme();
+    const { count, page, rowsPerPage, onPageChange } = props;
+
+    const handleFirstPageButtonClick = (event) => {
+      onPageChange(event, 0);
+    };
+
+    const handleBackButtonClick = (event) => {
+      onPageChange(event, page - 1);
+    };
+
+    const handleNextButtonClick = (event) => {
+      onPageChange(event, page + 1);
+    };
+
+    const handleLastPageButtonClick = (event) => {
+      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    };
+
+    return (
+      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+        <IconButton
+          onClick={handleFirstPageButtonClick}
+          disabled={page === 0}
+          aria-label="first page"
+        >
+          {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
+        </IconButton>
+        <IconButton
+          onClick={handleBackButtonClick}
+          disabled={page === 0}
+          aria-label="previous page"
+        >
+          {theme.direction === "rtl" ? (
+            <KeyboardArrowRight />
+          ) : (
+            <KeyboardArrowLeft />
+          )}
+        </IconButton>
+        <IconButton
+          onClick={handleNextButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="next page"
+        >
+          {theme.direction === "rtl" ? (
+            <KeyboardArrowLeft />
+          ) : (
+            <KeyboardArrowRight />
+          )}
+        </IconButton>
+        <IconButton
+          onClick={handleLastPageButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          aria-label="last page"
+        >
+          {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
+        </IconButton>
+      </Box>
+    );
   }
 
   return (
@@ -103,7 +222,7 @@ export default function BasicTable() {
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{drawTable()}</TableBody>
+        {drawTable()}
       </Table>
     </TableContainer>
   );
