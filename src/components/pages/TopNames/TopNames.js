@@ -1,5 +1,5 @@
 import React from 'react';
-import VerticalTabs from "./Items/Tabs";
+import VerticalTabs from "./items/Tabs";
 
 
 function TopNames(props) {

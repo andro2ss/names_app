@@ -1,10 +1,10 @@
 import './App.css';
-import AppBarHeader from "./Components/Header/Navigation/AppBar";
+import AppBarHeader from "./components/common/header/navigation/AppBar";
 import {Routes, Route} from "react-router-dom";
-import Home from "./Components/Body/Home/Home";
-import TopNames from "./Components/Body/TopNames/TopNames";
-import YourName from "./Components/Body/YourName/YourName";
-import GenerateKidName from "./Components/Body/GenerateKidName/GenerateKidName";
+import Home from "./components/pages/Home/Home";
+import TopNames from "./components/pages/TopNames/TopNames";
+import YourName from "./components/pages/YourName/YourName";
+import GenerateKidName from "./components/pages/GenerateKidName/GenerateKidName";
 import Container from '@mui/material/Container';
 
 

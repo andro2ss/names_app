@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import "./YourName.css"
 import * as PropTypes from "prop-types";
-import {YourNameForm} from "./Items/YourNameForm";
-import {YourNameStack} from "./Items/YourNameStack";
+import {YourNameForm} from "./items/YourNameForm";
+import {YourNameStack} from "./items/YourNameStack";
 
 YourNameForm.propTypes = {
     onSubmit: PropTypes.func,

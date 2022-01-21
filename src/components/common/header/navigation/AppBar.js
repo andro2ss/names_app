@@ -9,9 +9,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import MainLogo from "../MainLogo/MainLogo";
+import MainLogo from "../mainLogo/MainLogo";
 import {Link} from "react-router-dom";
-import uniId from "../../HelpFunction/UniqeID";
+import uniId from "../../../functions/UniqeID";
 
 const pages = ['Strona główna', 'Twoje imie', 'Najpopularniejsze imiona', 'Generator imion dla dzieci'];
 

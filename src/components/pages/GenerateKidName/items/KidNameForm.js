@@ -1,4 +1,4 @@
-import {drawItem} from "../../../HelpFunction/DrawItem";
+import {drawItem} from "../../../functions/DrawItem";
 import Box from "@mui/material/Box";
 import RowRadioButtonsGroup from "./RowRadioButtonsGroup";
 import RangeSlider from "./RangeSlider";

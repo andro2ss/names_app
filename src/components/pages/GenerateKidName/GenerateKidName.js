@@ -1,6 +1,6 @@
 import React from 'react';
-import BasicTable from "../TopNames/Items/Table";
-import {kidNameForm} from "./Items/KidNameForm";
+import BasicTable from "../../common/items/Table";
+import {kidNameForm} from "./items/KidNameForm";
 
 function GenerateKidName(props) {
     return (

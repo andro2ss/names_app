@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import EnhancedTable from "./Table";
-import BasicTable from "./Table";
+import EnhancedTable from "../../../common/items/Table";
+import BasicTable from "../../../common/items/Table";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
