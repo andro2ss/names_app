@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "./YourName.css"
+import "./YourName.scss"
 import * as PropTypes from "prop-types";
 import {YourNameForm} from "./items/YourNameForm";
 import {YourNameStack} from "./items/YourNameStack";
