@@ -13,7 +13,7 @@ export default function KidNameForm() {
   };
 
   return (
-    <Item className="yourName__form">
+    <Item>
       <Box
         component="form"
         sx={{
