@@ -28,3 +28,4 @@ src/firebase/.firebaserc
 src/firebase/.firebase
 src/firebase/firebase.js
 firebase.json
+.firebase

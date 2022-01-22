@@ -20,7 +20,6 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { createTableData } from "../../functions/CreateTableData";
 import "./spinner.css";
-import MainLogo from "../header/mainLogo/MainLogo";
 
 export default function BasicTable({ status, arrays, counters, selectedArr }) {
   const [sortTable, setSortTable] = useState("quantityDown");
