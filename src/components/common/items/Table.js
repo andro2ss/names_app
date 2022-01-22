@@ -19,6 +19,8 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { createTableData } from "../../functions/CreateTableData";
+import "./spinner.css";
+import MainLogo from "../header/mainLogo/MainLogo";
 
 export default function BasicTable({ status, arrays, counters, selectedArr }) {
   const [sortTable, setSortTable] = useState("quantityDown");
@@ -43,7 +45,36 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
           }
         }
       }
-
+      const drawHeader = () => {
+        return (
+          <TableHead>
+            <TableRow>
+              <TableCell>Imię</TableCell>
+              <TableCell
+                className="tHead"
+                onClick={() => {
+                  sortQuantity();
+                }}
+                align="right"
+              >
+                Ilość
+                {sortTable === "quantityDown" && <ArrowDownwardIcon />}
+                {sortTable === "quantityUp" && <ArrowUpwardIcon />}
+              </TableCell>
+              <TableCell
+                className="tHead"
+                onClick={() => {
+                  sortPercentage();
+                }}
+                align="right"
+              >
+                %{sortTable === "percentageDown" && <ArrowDownwardIcon />}
+                {sortTable === "percentageUp" && <ArrowUpwardIcon />}
+              </TableCell>
+            </TableRow>
+          </TableHead>
+        );
+      };
       const drawBody = () => {
         return (
           <TableBody>
@@ -107,6 +138,7 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
       };
       return (
         <>
+          {drawHeader()}
           {drawBody()}
           {drawFooter()}
         </>
@@ -207,36 +239,21 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Imię</TableCell>
-            <TableCell
-              className="tHead"
-              onClick={() => {
-                sortQuantity();
-              }}
-              align="right"
-            >
-              Ilość
-              {sortTable === "quantityDown" && <ArrowDownwardIcon />}
-              {sortTable === "quantityUp" && <ArrowUpwardIcon />}
-            </TableCell>
-            <TableCell
-              className="tHead"
-              onClick={() => {
-                sortPercentage();
-              }}
-              align="right"
-            >
-              %{sortTable === "percentageDown" && <ArrowDownwardIcon />}
-              {sortTable === "percentageUp" && <ArrowUpwardIcon />}
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        {drawTable()}
-      </Table>
-    </TableContainer>
+    <>
+      {status !== 2 ? (
+        <div className="spinner">
+          <div id="dots5">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      ) : (
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">{drawTable()}</Table>{" "}
+        </TableContainer>
+      )}
+    </>
   );
 }
