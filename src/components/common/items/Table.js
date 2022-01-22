@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { createTableData } from "../../functions/CreateTableData";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import TableFooter from "@mui/material/TableFooter";
@@ -19,86 +18,132 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
+import { createTableData } from "../../functions/CreateTableData";
+import "./spinner.css";
+import MainLogo from "../header/mainLogo/MainLogo";
 
-export default function BasicTable() {
+export default function BasicTable({ status, arrays, counters, selectedArr }) {
   const [sortTable, setSortTable] = useState("quantityDown");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const rows = [];
-
   useEffect(() => {
     drawTable();
-  }, [sortTable, page, rowsPerPage]);
+  }, [sortTable, page, rowsPerPage, status, selectedArr]);
 
   function drawTable() {
-    const drawBody = () => {
-      return (
-        <TableBody>
-          {rows
-            .sort((a, b) => {
-              if (sortTable === "quantityUp") {
-                return a.nameQuantity - b.nameQuantity;
-              } else if (sortTable === "quantityDown") {
-                return b.nameQuantity - a.nameQuantity;
-              } else if (sortTable === "percentageUp") {
-                return a.namePercentage - b.namePercentage;
-              } else if (sortTable === "percentageDown") {
-                return b.namePercentage - a.namePercentage;
-              }
-              return 0;
-            })
-            .filter((row, index) => {
-              return (
-                index >= page * rowsPerPage &&
-                index < page * rowsPerPage + rowsPerPage
-              );
-            })
-            .map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+    const rows = [];
+
+    if (status === 2) {
+      for (let i = 0; i < arrays.length; i++) {
+        if (selectedArr === i) {
+          for (let data of arrays[i]) {
+            const name = data[0];
+            const quantity = data[1];
+            const percentage = (quantity * 100) / counters[i];
+            rows.push(createTableData(name, quantity, percentage));
+          }
+        }
+      }
+      const drawHeader = () => {
+        return (
+          <TableHead>
+            <TableRow>
+              <TableCell>Imię</TableCell>
+              <TableCell
+                className="tHead"
+                onClick={() => {
+                  sortQuantity();
+                }}
+                align="right"
               >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.nameQuantity}</TableCell>
-                <TableCell align="right">{row.namePercentage}</TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      );
-    };
-    const drawFooter = () => {
+                Ilość
+                {sortTable === "quantityDown" && <ArrowDownwardIcon />}
+                {sortTable === "quantityUp" && <ArrowUpwardIcon />}
+              </TableCell>
+              <TableCell
+                className="tHead"
+                onClick={() => {
+                  sortPercentage();
+                }}
+                align="right"
+              >
+                %{sortTable === "percentageDown" && <ArrowDownwardIcon />}
+                {sortTable === "percentageUp" && <ArrowUpwardIcon />}
+              </TableCell>
+            </TableRow>
+          </TableHead>
+        );
+      };
+      const drawBody = () => {
+        return (
+          <TableBody>
+            {rows
+              .sort((a, b) => {
+                if (sortTable === "quantityUp") {
+                  return a.nameQuantity - b.nameQuantity;
+                } else if (sortTable === "quantityDown") {
+                  return b.nameQuantity - a.nameQuantity;
+                } else if (sortTable === "percentageUp") {
+                  return a.namePercentage - b.namePercentage;
+                } else if (sortTable === "percentageDown") {
+                  return b.namePercentage - a.namePercentage;
+                }
+                return 0;
+              })
+              .filter((row, index) => {
+                return (
+                  index >= page * rowsPerPage &&
+                  index < page * rowsPerPage + rowsPerPage
+                );
+              })
+              .map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.nameQuantity}</TableCell>
+                  <TableCell align="right">{row.namePercentage}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        );
+      };
+      const drawFooter = () => {
+        return (
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 20]}
+                colSpan={3}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: {
+                    "aria-label": "rows per page",
+                  },
+                  native: true,
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
+        );
+      };
       return (
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 20]}
-              colSpan={3}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: {
-                  "aria-label": "rows per page",
-                },
-                native: true,
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
+        <>
+          {drawHeader()}
+          {drawBody()}
+          {drawFooter()}
+        </>
       );
-    };
-    return (
-      <>
-        {drawBody()}
-        {drawFooter()}
-      </>
-    );
+    }
   }
 
   function sortQuantity() {
@@ -194,36 +239,21 @@ export default function BasicTable() {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Imię</TableCell>
-            <TableCell
-              className="tHead"
-              onClick={() => {
-                sortQuantity();
-              }}
-              align="right"
-            >
-              Ilość
-              {sortTable === "quantityDown" && <ArrowDownwardIcon />}
-              {sortTable === "quantityUp" && <ArrowUpwardIcon />}
-            </TableCell>
-            <TableCell
-              className="tHead"
-              onClick={() => {
-                sortPercentage();
-              }}
-              align="right"
-            >
-              %{sortTable === "percentageDown" && <ArrowDownwardIcon />}
-              {sortTable === "percentageUp" && <ArrowUpwardIcon />}
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        {drawTable()}
-      </Table>
-    </TableContainer>
+    <>
+      {status !== 2 ? (
+        <div className="spinner">
+          <div id="dots5">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      ) : (
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">{drawTable()}</Table>{" "}
+        </TableContainer>
+      )}
+    </>
   );
 }
