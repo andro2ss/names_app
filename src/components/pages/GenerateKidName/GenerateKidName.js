@@ -12,16 +12,15 @@ function GenerateKidName() {
   const [loadedGirlData, setLoadedGirlData] = useState([]);
   const [counterBoy, setCounterBoy] = useState(0);
   const [counterGirl, setCounterGirl] = useState(0);
+  const [selectedArr, setSelectedArr] = useState(1);
 
   useEffect(() => {
-    loadData();
     saveData();
     // readData();
   }, [progressStatus, progressStatusAsync]);
 
-  const loadData = (url) => {
+  const saveData = () => {
     if (progressStatus === 0) {
-      console.log("Pobieram suruwke");
       fetch(
         "https://api.dane.gov.pl/1.4/resources/33191,imiona-nadane-dzieciom-w-polsce-w-i-poowie-2021-r-imie-pierwsze/data"
       )
@@ -32,19 +31,10 @@ function GenerateKidName() {
         });
       setProgressStatus(1);
     }
-    if (progressStatusAsync === 1 && progressStatus === 1) {
-      console.log("Suruwka pobrana smacznego:");
-      console.log(typeof rawData);
-      console.log(rawData);
-    }
-  };
-  const saveData = () => {
+
     if (progressStatusAsync === 1 && progressStatus === 1) {
       let helpMaxPages = rawData.links.last.split("=");
       let maxPages = parseInt(helpMaxPages[helpMaxPages.length - 1]);
-      console.log("Surowe dane: ");
-      console.log(rawData);
-      console.log("Zaczynam petle stron");
       const tempBoyArr = [];
       let tempCounterBoy = 0;
       const tempGirlArr = [];
@@ -118,10 +108,9 @@ function GenerateKidName() {
           <div className="generateKidName__table">
             <BasicTable
               status={progressStatusAsync}
-              arr1={loadedBoyData}
-              arr2={loadedGirlData}
-              counter1={counterBoy}
-              counter2={counterGirl}
+              arrays={[loadedBoyData, loadedGirlData]}
+              counters={[counterBoy, counterGirl]}
+              selectedArr={selectedArr}
             />
           </div>
         </div>
