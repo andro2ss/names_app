@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { createTableData } from "../../functions/CreateTableData";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import TableFooter from "@mui/material/TableFooter";
@@ -20,19 +19,19 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 
-export default function BasicTable() {
+export default function BasicTable({ arrData, start }) {
   const [sortTable, setSortTable] = useState("quantityDown");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
   const rows = [];
 
   useEffect(() => {
     drawTable();
-  }, [sortTable, page, rowsPerPage]);
+  }, [sortTable, page, rowsPerPage, start]);
 
   function drawTable() {
     const drawBody = () => {
+      console.log(rows[0].name);
       return (
         <TableBody>
           {rows
@@ -95,7 +94,7 @@ export default function BasicTable() {
     };
     return (
       <>
-        {drawBody()}
+        {/*{start === 1 ? drawBody() : <p>Loading</p>}*/}
         {drawFooter()}
       </>
     );
