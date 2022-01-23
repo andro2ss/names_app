@@ -36,7 +36,7 @@ function GenerateKidName() {
       <div className="generateKidName">
         <h2>Znajdź imię dla swojej pociechy</h2>{" "}
         <div className="generateKidName__container">
-          <KidNameForm gender={setSelectedArr} />
+          <KidNameForm setGender={setSelectedArr} gender={selectedArr} />
           <div className="generateKidName__table">
             <BasicTable
               status={progressStatusAsync}

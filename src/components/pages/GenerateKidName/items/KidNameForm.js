@@ -5,7 +5,7 @@ import RangeSlider from "./RangeSlider";
 import Button from "@mui/material/Button";
 import React from "react";
 
-export default function KidNameForm() {
+export default function KidNameForm({ gender, setGender }) {
   const Item = drawItem();
 
   const handleSubmit = (e) => {
@@ -27,7 +27,7 @@ export default function KidNameForm() {
         className="form__name"
       >
         <h4>Generator imion</h4>
-        <RowRadioButtonsGroup />
+        <RowRadioButtonsGroup gender={gender} setGender={setGender} />
         <p>Określ przedział popularności imienia</p>
         <RangeSlider />
         <Button variant="outlined" type="submit">
