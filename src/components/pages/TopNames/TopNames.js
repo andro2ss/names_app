@@ -62,6 +62,7 @@ function TopNames() {
             arrays={arrays}
             counters={counters}
             selectedArr={0}
+            rangeFilter={[0, 100]}
           />
           <p>Panie</p>
           <BasicTable
@@ -69,6 +70,7 @@ function TopNames() {
             arrays={arrays}
             counters={counters}
             selectedArr={1}
+            rangeFilter={[0, 100]}
           />
         </div>
       </div>

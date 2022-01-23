@@ -40,9 +40,9 @@ export default function KidNameForm({
           rangeFilter={rangeFilter}
           setRangeFilter={setRangeFilter}
         />
-        <Button variant="outlined" type="submit">
-          Gotowe
-        </Button>
+        {/*<Button variant="outlined" type="submit">*/}
+        {/*  Gotowe*/}
+        {/*</Button>*/}
       </Box>
     </Item>
   );

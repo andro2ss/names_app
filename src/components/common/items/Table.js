@@ -19,8 +19,8 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { createTableData } from "../../functions/CreateTableData";
-import "./spinner.css";
 import RangeFilterForTable from "../../functions/RangeFilterForTable";
+import { Spinner } from "./Spinner";
 
 export default function BasicTable({
   status,
@@ -32,10 +32,14 @@ export default function BasicTable({
   const [sortTable, setSortTable] = useState("quantityDown");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  const [tempRange, setTempRange] = useState([]);
   useEffect(() => {
     drawTable();
-  }, [sortTable, page, rowsPerPage, status, selectedArr]);
+    if (tempRange !== rangeFilter) {
+      setPage(0);
+      setTempRange(rangeFilter);
+    }
+  }, [sortTable, page, rowsPerPage, status, selectedArr, rangeFilter]);
 
   function drawTable() {
     const rows = [];
@@ -88,6 +92,12 @@ export default function BasicTable({
         return (
           <TableBody>
             {rows
+              .filter((row, index) => {
+                return (
+                  index >= RangeFilterForTable(rows, rangeFilter)[0] &&
+                  index <= RangeFilterForTable(rows, rangeFilter)[1]
+                );
+              })
               .sort((a, b) => {
                 if (sortTable === "quantityUp") {
                   return a.nameQuantity - b.nameQuantity;
@@ -100,12 +110,7 @@ export default function BasicTable({
                 }
                 return 0;
               })
-              .filter((row, index) => {
-                return (
-                  index >= RangeFilterForTable(rows, rangeFilter)[0] &&
-                  index <= RangeFilterForTable(rows, rangeFilter)[1]
-                );
-              })
+
               .filter((row, index) => {
                 return (
                   index >= page * rowsPerPage &&
@@ -134,7 +139,11 @@ export default function BasicTable({
               <TablePagination
                 rowsPerPageOptions={[5, 10, 20]}
                 colSpan={3}
-                count={rows.length}
+                count={
+                  RangeFilterForTable(rows, rangeFilter)[1] -
+                  RangeFilterForTable(rows, rangeFilter)[0] +
+                  1
+                }
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
@@ -183,7 +192,6 @@ export default function BasicTable({
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    console.log(page);
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -256,14 +264,7 @@ export default function BasicTable({
   return (
     <>
       {status !== 2 ? (
-        <div className="spinner">
-          <div id="dots5">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
+        <Spinner />
       ) : (
         <TableContainer component={Paper}>
           <Table aria-label="simple table">{drawTable()}</Table>{" "}
