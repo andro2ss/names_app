@@ -20,8 +20,15 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { createTableData } from "../../functions/CreateTableData";
 import "./spinner.css";
+import RangeFilterForTable from "../../functions/RangeFilterForTable";
 
-export default function BasicTable({ status, arrays, counters, selectedArr }) {
+export default function BasicTable({
+  status,
+  arrays,
+  counters,
+  selectedArr,
+  rangeFilter,
+}) {
   const [sortTable, setSortTable] = useState("quantityDown");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -34,6 +41,7 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
     const rows = [];
 
     if (status === 2) {
+      // create data for table
       for (let i = 0; i < arrays.length; i++) {
         if (selectedArr === i) {
           for (let data of arrays[i]) {
@@ -44,6 +52,7 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
           }
         }
       }
+      // draw table header
       const drawHeader = () => {
         return (
           <TableHead>
@@ -74,6 +83,7 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
           </TableHead>
         );
       };
+      // draw table body
       const drawBody = () => {
         return (
           <TableBody>
@@ -89,6 +99,12 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
                   return b.namePercentage - a.namePercentage;
                 }
                 return 0;
+              })
+              .filter((row, index) => {
+                return (
+                  index >= RangeFilterForTable(rows, rangeFilter)[0] &&
+                  index <= RangeFilterForTable(rows, rangeFilter)[1]
+                );
               })
               .filter((row, index) => {
                 return (

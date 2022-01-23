@@ -13,6 +13,7 @@ function GenerateKidName() {
   const [counterBoy, setCounterBoy] = useState(0);
   const [counterGirl, setCounterGirl] = useState(0);
   const [selectedArr, setSelectedArr] = useState(0);
+  const [rangeFilter, setRangeFilter] = React.useState([0, 100]);
 
   useEffect(() => {
     SaveDataApi(
@@ -36,13 +37,20 @@ function GenerateKidName() {
       <div className="generateKidName">
         <h2>Znajdź imię dla swojej pociechy</h2>{" "}
         <div className="generateKidName__container">
-          <KidNameForm setGender={setSelectedArr} gender={selectedArr} />
+          <KidNameForm
+            setGender={setSelectedArr}
+            gender={selectedArr}
+            rangeFilter={rangeFilter}
+            setRangeFilter={setRangeFilter}
+            setProgressStatus={setProgressStatus}
+          />
           <div className="generateKidName__table">
             <BasicTable
               status={progressStatusAsync}
               arrays={[loadedBoyData, loadedGirlData]}
               counters={[counterBoy, counterGirl]}
               selectedArr={selectedArr}
+              rangeFilter={rangeFilter}
             />
           </div>
         </div>
