@@ -1,13 +1,13 @@
 import { drawItem } from "../../../functions/DrawItem";
 import Box from "@mui/material/Box";
-import RowRadioButtonsGroup from "./RowRadioButtonsGroup";
+import RowRadioButtonsGroup from "../../../common/items/RowRadioButtonsGroup";
 import RangeSlider from "./RangeSlider";
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
 
 export default function KidNameForm({
-  gender,
-  setGender,
+  selectedArr,
+  setSelectedArr,
   rangeFilter,
   setRangeFilter,
   setProgressStatus,
@@ -34,7 +34,13 @@ export default function KidNameForm({
         className="form__name"
       >
         <h4>Generator imion</h4>
-        <RowRadioButtonsGroup gender={gender} setGender={setGender} />
+        <RowRadioButtonsGroup
+          selectedArr={selectedArr}
+          setSelectedArr={setSelectedArr}
+          inputLabel={["Chłopca", "Dziewczynki"]}
+          inputValue={["male", "female"]}
+          formLabel={"Szukasz imienia dla:"}
+        />
         <p>Określ przedział popularności imienia</p>
         <RangeSlider
           rangeFilter={rangeFilter}
