@@ -3,12 +3,19 @@ import Box from "@mui/material/Box";
 import RowRadioButtonsGroup from "./RowRadioButtonsGroup";
 import RangeSlider from "./RangeSlider";
 import Button from "@mui/material/Button";
-import React from "react";
+import React, { useState } from "react";
 
-export default function KidNameForm({ gender, setGender }) {
+export default function KidNameForm({
+  gender,
+  setGender,
+  rangeFilter,
+  setRangeFilter,
+  setProgressStatus,
+}) {
   const Item = drawItem();
 
   const handleSubmit = (e) => {
+    console.log(rangeFilter);
     e.preventDefault();
   };
 
@@ -29,10 +36,13 @@ export default function KidNameForm({ gender, setGender }) {
         <h4>Generator imion</h4>
         <RowRadioButtonsGroup gender={gender} setGender={setGender} />
         <p>Określ przedział popularności imienia</p>
-        <RangeSlider />
-        <Button variant="outlined" type="submit">
-          Gotowe
-        </Button>
+        <RangeSlider
+          rangeFilter={rangeFilter}
+          setRangeFilter={setRangeFilter}
+        />
+        {/*<Button variant="outlined" type="submit">*/}
+        {/*  Gotowe*/}
+        {/*</Button>*/}
       </Box>
     </Item>
   );

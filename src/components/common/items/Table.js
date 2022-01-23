@@ -19,21 +19,33 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { createTableData } from "../../functions/CreateTableData";
-import "./spinner.css";
+import RangeFilterForTable from "../../functions/RangeFilterForTable";
+import { Spinner } from "./Spinner";
 
-export default function BasicTable({ status, arrays, counters, selectedArr }) {
+export default function BasicTable({
+  status,
+  arrays,
+  counters,
+  selectedArr,
+  rangeFilter,
+}) {
   const [sortTable, setSortTable] = useState("quantityDown");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  const [tempRange, setTempRange] = useState([]);
   useEffect(() => {
     drawTable();
-  }, [sortTable, page, rowsPerPage, status, selectedArr]);
+    if (tempRange !== rangeFilter) {
+      setPage(0);
+      setTempRange(rangeFilter);
+    }
+  }, [sortTable, page, rowsPerPage, status, selectedArr, rangeFilter]);
 
   function drawTable() {
     const rows = [];
 
     if (status === 2) {
+      // create data for table
       for (let i = 0; i < arrays.length; i++) {
         if (selectedArr === i) {
           for (let data of arrays[i]) {
@@ -44,6 +56,7 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
           }
         }
       }
+      // draw table header
       const drawHeader = () => {
         return (
           <TableHead>
@@ -74,10 +87,17 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
           </TableHead>
         );
       };
+      // draw table body
       const drawBody = () => {
         return (
           <TableBody>
             {rows
+              .filter((row, index) => {
+                return (
+                  index >= RangeFilterForTable(rows, rangeFilter)[0] &&
+                  index <= RangeFilterForTable(rows, rangeFilter)[1]
+                );
+              })
               .sort((a, b) => {
                 if (sortTable === "quantityUp") {
                   return a.nameQuantity - b.nameQuantity;
@@ -90,6 +110,7 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
                 }
                 return 0;
               })
+
               .filter((row, index) => {
                 return (
                   index >= page * rowsPerPage &&
@@ -118,7 +139,11 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 20]}
                 colSpan={3}
-                count={rows.length}
+                count={
+                  RangeFilterForTable(rows, rangeFilter)[1] -
+                  RangeFilterForTable(rows, rangeFilter)[0] +
+                  1
+                }
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
@@ -167,7 +192,6 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
-    console.log(page);
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -240,14 +264,7 @@ export default function BasicTable({ status, arrays, counters, selectedArr }) {
   return (
     <>
       {status !== 2 ? (
-        <div className="spinner">
-          <div id="dots5">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
+        <Spinner />
       ) : (
         <TableContainer component={Paper}>
           <Table aria-label="simple table">{drawTable()}</Table>{" "}
