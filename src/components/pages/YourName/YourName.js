@@ -10,7 +10,7 @@ YourNameForm.propTypes = {
   onChange: PropTypes.func,
 };
 
-function YourName() {
+function YourName({ status, arrays, counters }) {
   const [name, setName] = useState("");
 
   return (
