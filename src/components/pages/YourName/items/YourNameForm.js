@@ -1,10 +1,12 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import React from "react";
+import React, { useState } from "react";
 import RowRadioButtonsGroup from "../../../common/items/RowRadioButtonsGroup";
 import { correctNameWrite } from "../../../functions/CorrectNameWrite";
 import { textFieldValidation } from "../../../functions/TextFieldValidation";
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
 
 export function YourNameForm({
   name,
@@ -16,6 +18,7 @@ export function YourNameForm({
   selectedArr,
   setSelectedArr,
 }) {
+  const [needHelp, setNeedHelp] = useState("no");
   const handleChange = (event) => {
     setName(event.target.value);
   };
@@ -31,10 +34,11 @@ export function YourNameForm({
           setNameData([
             correctNameWrite(name),
             dataFromArray[0][1],
-            (dataFromArray[0][1] * 100) / counters[selectedArr],
+            ((dataFromArray[0][1] * 100) / counters[selectedArr]).toFixed(8),
           ]);
         } else {
-          alert("Nie znaleziono imienia");
+          setNeedHelp("yes");
+          alert("Nie znaleziono imienia... \nPomożemy Ci");
         }
       }
     }
@@ -55,14 +59,30 @@ export function YourNameForm({
       >
         <h4>Sprawdźmy To !</h4>
         <p>Jakie imię Ciebie interesuje?</p>
-        <TextField
-          margin="normal"
-          id="outlined-required"
-          label="Podaj imię"
-          type="text"
-          value={name}
-          onChange={handleChange}
-        />
+        {needHelp === "yes" ? (
+          <Autocomplete
+            id="textFieldAutoComplete"
+            freeSolo
+            options={arrays[selectedArr].map((option) => option[0])}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Podaj imię"
+                value={name}
+                onSelect={handleChange}
+              />
+            )}
+          />
+        ) : (
+          <TextField
+            margin="normal"
+            id="nameTextField"
+            label="Podaj imię"
+            type="text"
+            value={name}
+            onChange={handleChange}
+          />
+        )}
         <RowRadioButtonsGroup
           selectedArr={selectedArr}
           setSelectedArr={setSelectedArr}
