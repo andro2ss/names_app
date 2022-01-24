@@ -1,20 +1,47 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
-import React from "react";
+import React, { useState } from "react";
+import RowRadioButtonsGroup from "../../../common/items/RowRadioButtonsGroup";
+import { correctNameWrite } from "../../../functions/CorrectNameWrite";
+import { textFieldValidation } from "../../../functions/TextFieldValidation";
+import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
 
-export function YourNameForm({ name, setName }) {
+export function YourNameForm({
+  name,
+  setName,
+  setNameData,
+  status,
+  arrays,
+  counters,
+  selectedArr,
+  setSelectedArr,
+}) {
+  const [needHelp, setNeedHelp] = useState("no");
   const handleChange = (event) => {
     setName(event.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (textFieldValidation(name)) {
+      if (status === 2) {
+        let dataFromArray = arrays[selectedArr].filter(
+          (item) => item[0].toLowerCase() === name.toLowerCase()
+        );
+        if (dataFromArray.length > 0) {
+          setNameData([
+            correctNameWrite(name),
+            dataFromArray[0][1],
+            ((dataFromArray[0][1] * 100) / counters[selectedArr]).toFixed(8),
+          ]);
+        } else {
+          setNeedHelp("yes");
+          alert("Nie znaleziono imienia... \nPomożemy Ci");
+        }
+      }
+    }
   };
   return (
     <div className="yourName__form">
@@ -32,31 +59,37 @@ export function YourNameForm({ name, setName }) {
       >
         <h4>Sprawdźmy To !</h4>
         <p>Jakie imię Ciebie interesuje?</p>
-        <TextField
-          margin="normal"
-          id="outlined-required"
-          label="Podaj imię"
-          type="text"
-          value={name}
-          onChange={handleChange}
+        {needHelp === "yes" ? (
+          <Autocomplete
+            id="textFieldAutoComplete"
+            freeSolo
+            options={arrays[selectedArr].map((option) => option[0])}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Podaj imię"
+                value={name}
+                onSelect={handleChange}
+              />
+            )}
+          />
+        ) : (
+          <TextField
+            margin="normal"
+            id="nameTextField"
+            label="Podaj imię"
+            type="text"
+            value={name}
+            onChange={handleChange}
+          />
+        )}
+        <RowRadioButtonsGroup
+          selectedArr={selectedArr}
+          setSelectedArr={setSelectedArr}
+          inputLabel={["Męskie", "Żeńskie"]}
+          inputValue={["male", "female"]}
+          formLabel={"Jest to imię męskie czy żeńskie?"}
         />
-        <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">
-            Jest to imię męskie czy żeńskie?
-          </FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-          >
-            <FormControlLabel value="male" control={<Radio />} label="Męskie" />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Żeńskie"
-            />
-          </RadioGroup>
-        </FormControl>
         <Button variant="outlined" type="submit">
           Gotowe
         </Button>

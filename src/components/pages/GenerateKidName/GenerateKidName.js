@@ -38,8 +38,8 @@ function GenerateKidName() {
         <h2>Znajdź imię dla swojej pociechy</h2>{" "}
         <div className="generateKidName__container">
           <KidNameForm
-            setGender={setSelectedArr}
-            gender={selectedArr}
+            setSelectedArr={setSelectedArr}
+            selectedArr={selectedArr}
             rangeFilter={rangeFilter}
             setRangeFilter={setRangeFilter}
             setProgressStatus={setProgressStatus}
