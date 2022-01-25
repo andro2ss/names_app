@@ -1,21 +1,19 @@
 .yourName {
-  .form__name {
-    width: 100%;
-  }
+  animation: fadeIn;
+  animation-duration: 1500ms;
 
-  .form__name Input {
-    /*justify-content: center;*/
+  .title {
+    align-self: center;
+    text-align: center;
+    border-bottom: 2px dashed black;
+    padding-bottom: 5px;
+    width: 100%
   }
 
   .yourName__container {
     display: flex;
     column-gap: 100px;
   }
-
-  .yourName__form {
-    min-width: 40%;
-  }
-
 }
 
 

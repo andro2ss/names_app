@@ -1,30 +1,40 @@
 import { drawItem } from "../../../functions/DrawItem";
 import Stack from "@mui/material/Stack";
 import React from "react";
-
+import "./YourNameStack.scss";
 export function YourNameStack({ nameData, selectedArr, counters }) {
   const Item = drawItem();
   return (
     <Stack
+      className="yourName__stack"
       direction="column"
       justifyContent="center"
       alignItems="stretch"
-      spacing={2}
+      spacing={3}
     >
-      <Item>
-        <h3>{nameData[0]}</h3>
+      <Item className="stack__box">
+        <h3 className="box__title">{nameData[0]}</h3>
       </Item>
-      <Item>W Polsce żyje {nameData[1]} osób o tym imieniu</Item>
-      <Item>
+      <Item className="stack__box">
+        Żyje {nameData[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} osób
+        zarejestrowanych w Polsce z tym imieniem.
+      </Item>
+      <Item className="stack__box">
         Ma je {nameData[2]} % wszystkich{" "}
         {selectedArr === 0 ? "mężczyzn" : "kobiet"} zarejestrowanych w Polsce
       </Item>
-      <Item>
-        W Polsce żyje około {counters[0]} mężczyzn i {counters[1]} kobiet,{" "}
+      <Item className="stack__box">
+        W Polsce zarejestrowano{" "}
+        {counters[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} mężczyzn
+        i {counters[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} kobiet,{" "}
         <br />
-        dając wynik {counters[0] + counters[1]} wszystkich obywateli{" "}
+        dając wynik{" "}
+        {(counters[0] + counters[1])
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+        o których istnieniu wie rząd polski{" "}
       </Item>
-      <Item>
+      <Item className="stack__box">
         Informacje pochodzą ze strony{" "}
         <a href={"https://dane.gov.pl/"}>dane.gov.pl</a> <br />
         zostały wygenerowane w styczniu 2021 roku.
