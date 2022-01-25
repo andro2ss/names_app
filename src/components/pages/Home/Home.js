@@ -14,16 +14,16 @@ function Home(props) {
             globalnym zasięgu możemy pomarzyć :)
           </li>
           <li className="list__item">
-            Dowiedzieć się, jakie imiona są najczęściej spotykane, albo jak
-            wolisz unikatowe... Uwaga spoiler w danych, którymi dysponujemy nie
-            ma rodzynków.{" "}
+            Dowiedzieć się, jakie imiona są najczęściej spotykane, bądź
+            unikatowe... Uwaga spoiler! W danych, którymi dysponujemy, nie ma
+            rodzynków!
           </li>
           <li className="list__item">
-            Wygenerować imię dla swojej pociechy na bazie trendów jakie panowały
-            w zeszłym roku
+            Wygenerować imię dla Twojej pociechy, na bazie trendów, jakie
+            panowały w zeszłym roku.
           </li>
         </ul>
-        <h4 className="text--ending">Zapraszamy do Zabawy</h4>
+        <h4 className="text--ending">Zapraszamy do Zabawy!</h4>
       </div>
     </div>
   );
