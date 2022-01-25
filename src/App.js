@@ -1,5 +1,4 @@
 import "./App.css";
-import AppBarHeader from "./components/common/header/navigation/AppBar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home/Home";
 import TopNames from "./components/pages/TopNames/TopNames";
@@ -62,7 +61,6 @@ function App() {
   return (
     <>
       <header>
-        {/*<AppBarHeader />*/}
         <NavBar
           pages={[
             "Strona główna",

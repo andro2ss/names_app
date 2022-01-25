@@ -18,9 +18,21 @@ export default function NavBar({ pages }) {
         >
           <i className="fa fa-bars"></i>
         </label>
-        <Link to="#" className="logo">
+        <div
+          className="logo"
+          onClick={() => {
+            document
+              .querySelector(".link--active")
+              .classList.remove("link--active");
+            document
+              .querySelector("#js-menu")
+              .firstElementChild.firstElementChild.classList.add(
+                "link--active"
+              );
+          }}
+        >
           <MainLogo />
-        </Link>
+        </div>
         <input type="checkbox" id="chkToggle"></input>
         <ul className="main-nav" id="js-menu">
           {pages.map((page) => (
