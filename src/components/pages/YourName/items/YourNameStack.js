@@ -16,12 +16,13 @@ export function YourNameStack({ nameData, selectedArr, counters }) {
         <h3 className="box__title">{nameData[0]}</h3>
       </Item>
       <Item className="stack__box">
-        Żyje {nameData[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} osób
-        zarejestrowanych w Polsce z tym imieniem.
+        Żyje {nameData[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+        {selectedArr === 0 ? "mężczyzn" : "kobiet"} z tym imieniem
+        zarejestrowanym w Polsce.
       </Item>
       <Item className="stack__box">
         Ma je {nameData[2]} % wszystkich{" "}
-        {selectedArr === 0 ? "mężczyzn" : "kobiet"} zarejestrowanych w Polsce
+        {selectedArr === 0 ? "mężczyzn" : "kobiet"} zarejestrowanych w Polsce.
       </Item>
       <Item className="stack__box">
         W Polsce zarejestrowano{" "}
@@ -32,7 +33,7 @@ export function YourNameStack({ nameData, selectedArr, counters }) {
         {(counters[0] + counters[1])
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
-        o których istnieniu wie rząd polski{" "}
+        o których istnieniu wie rząd polski.{" "}
       </Item>
       <Item className="stack__box">
         Informacje pochodzą ze strony{" "}

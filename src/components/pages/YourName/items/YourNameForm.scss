@@ -19,3 +19,12 @@
 
   }
 }
+
+@media only screen and (max-width: 900px) {
+  /* For mobile phones: */
+  .yourName__form {
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px dashed #224fac;
+  }
+}

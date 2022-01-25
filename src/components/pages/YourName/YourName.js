@@ -45,7 +45,17 @@ function YourName({ status, arrays, counters }) {
               counters={counters}
             />
           ) : (
-            <Spinner />
+            <span className="yourName__box--wait">
+              <span className="box__title">
+                Names <span className="box__title--sub">Info</span>
+              </span>
+              <span className="box__text">
+                Czekamy na{" "}
+                <span className="box__text--animated animate__animated animate__flash animate__slow animate__infinite">
+                  IMIE
+                </span>
+              </span>
+            </span>
           )}
         </div>
       </div>
