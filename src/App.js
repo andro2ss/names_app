@@ -71,7 +71,7 @@ function App() {
         />
       </header>
       <main>
-        <Container fixed>
+        <div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
@@ -91,7 +91,7 @@ function App() {
               element={<GenerateKidName />}
             />
           </Routes>
-        </Container>
+        </div>
       </main>
     </>
   );

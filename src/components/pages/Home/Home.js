@@ -1,20 +1,31 @@
 import React from "react";
-import Box from "@mui/material/Box";
-
+// import Box from "@mui/material/Box";
+import "./Home.scss";
 function Home(props) {
   return (
-    <Box sx={{ bgcolor: "#cfe8fc", height: "100%" }}>
-      <h1>Names Info</h1>
-      <hr />
-      <h3> Miło że jesteś z nami !!!</h3>
-      <p>Dzięki nam dowiesz się</p>
-      <ul>
-        <li>co nieco o swoim imieniu,</li>
-        <li>Jakie są najpopularniejsze imiona w Polsce,</li>
-        <li> a także wygenerujesz imię dla swojej pociechy.</li>
-      </ul>
-      <p>Zapraszam do Zabawy</p>
-    </Box>
+    <div className="home__container animate__animated animate__jackInTheBox">
+      <div className="box">
+        <h1 className="title">Names Info</h1>
+        <h3 className="description"> Miło że jesteś z nami !!!</h3>
+        <p className="description">Z nami możesz:</p>
+        <ul className="list">
+          <li className="list__item">
+            Sprawdzić ilu jest Twoich imienników, zarejestrowanych w Polsce. O
+            globalnym zasięgu możemy pomażyć :)
+          </li>
+          <li className="list__item">
+            Dowiedzieć się, jakie imiona są najczęściej spotykane, albo jak
+            wolisz unikatowe... Uwaga spoiler w danych, którymi dysponujemy nie
+            ma rodzynków.{" "}
+          </li>
+          <li className="list__item">
+            Wygenerować imię dla swojej pociechy na bazie trendów jakie panowały
+            w zeszłym roku
+          </li>
+        </ul>
+        <h4 className="text--ending">Zapraszamy do Zabawy</h4>
+      </div>
+    </div>
   );
 }
 
