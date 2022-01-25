@@ -11,7 +11,7 @@ function Home(props) {
           <p className="description">Z nami możesz:</p>
           <li className="list__item">
             Sprawdzić ilu jest Twoich imienników, zarejestrowanych w Polsce. O
-            globalnym zasięgu możemy pomażyć :)
+            globalnym zasięgu możemy pomarzyć :)
           </li>
           <li className="list__item">
             Dowiedzieć się, jakie imiona są najczęściej spotykane, albo jak
