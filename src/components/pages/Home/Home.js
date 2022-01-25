@@ -3,12 +3,12 @@ import React from "react";
 import "./Home.scss";
 function Home(props) {
   return (
-    <div className="home__container animate__animated animate__jackInTheBox">
+    <div className="home">
       <div className="box">
         <h1 className="title">Names Info</h1>
         <h3 className="description"> Miło że jesteś z nami !!!</h3>
-        <p className="description">Z nami możesz:</p>
         <ul className="list">
+          <p className="description">Z nami możesz:</p>
           <li className="list__item">
             Sprawdzić ilu jest Twoich imienników, zarejestrowanych w Polsce. O
             globalnym zasięgu możemy pomażyć :)

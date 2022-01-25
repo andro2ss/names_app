@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home/Home";
 import TopNames from "./components/pages/TopNames/TopNames";
@@ -71,7 +71,7 @@ function App() {
         />
       </header>
       <main>
-        <div>
+        <div className="page__container">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
