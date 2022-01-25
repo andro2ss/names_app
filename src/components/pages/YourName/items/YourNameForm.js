@@ -6,7 +6,7 @@ import RowRadioButtonsGroup from "../../../common/items/RowRadioButtonsGroup";
 import { correctNameWrite } from "../../../functions/CorrectNameWrite";
 import { textFieldValidation } from "../../../functions/TextFieldValidation";
 import Autocomplete from "@mui/material/Autocomplete";
-import Stack from "@mui/material/Stack";
+import "./YourNameForm.scss";
 
 export function YourNameForm({
   name,
@@ -17,6 +17,7 @@ export function YourNameForm({
   counters,
   selectedArr,
   setSelectedArr,
+  setFormReady,
 }) {
   const [needHelp, setNeedHelp] = useState("no");
   const handleChange = (event) => {
@@ -36,6 +37,7 @@ export function YourNameForm({
             dataFromArray[0][1],
             ((dataFromArray[0][1] * 100) / counters[selectedArr]).toFixed(8),
           ]);
+          setFormReady(1);
         } else {
           setNeedHelp("yes");
           alert("Nie znaleziono imienia... \nPomożemy Ci");
@@ -55,10 +57,10 @@ export function YourNameForm({
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit}
-        className="form__name"
+        className="form__box"
       >
-        <h4>Sprawdźmy To !</h4>
-        <p>Jakie imię Ciebie interesuje?</p>
+        <h3 className="box__title">Sprawdźmy To !</h3>
+        <p className="box__text">Jakie imię Ciebie interesuje?</p>
         {needHelp === "yes" ? (
           <Autocomplete
             id="textFieldAutoComplete"
@@ -70,6 +72,7 @@ export function YourNameForm({
                 label="Podaj imię"
                 value={name}
                 onSelect={handleChange}
+                className="textField__input"
               />
             )}
           />
@@ -81,6 +84,7 @@ export function YourNameForm({
             type="text"
             value={name}
             onChange={handleChange}
+            className="textField__input"
           />
         )}
         <RowRadioButtonsGroup
@@ -90,7 +94,7 @@ export function YourNameForm({
           inputValue={["male", "female"]}
           formLabel={"Jest to imię męskie czy żeńskie?"}
         />
-        <Button variant="outlined" type="submit">
+        <Button className="button--submit" variant="outlined" type="submit">
           Gotowe
         </Button>
       </Box>

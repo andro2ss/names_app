@@ -1,0 +1,30 @@
+.yourName__form {
+  min-width: 30%;
+  border-top-left-radius: 78px 28px;
+  border-top-right-radius: 23px 130px;
+  border-bottom-left-radius: 110px 19px;
+  border-bottom-right-radius: 120px 24px;
+  border: solid 3px #6e7491;
+  padding: 3%;
+
+  .textField__input {
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+
+  .button--submit{
+    margin: 30px 3%;
+    padding: 16px;
+
+
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  /* For mobile phones: */
+  .yourName__form {
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px dashed #224fac;
+  }
+}
