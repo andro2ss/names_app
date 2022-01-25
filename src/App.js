@@ -1,5 +1,4 @@
 import "./App.css";
-import AppBarHeader from "./components/common/header/navigation/AppBar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home/Home";
 import TopNames from "./components/pages/TopNames/TopNames";
@@ -8,6 +7,7 @@ import GenerateKidName from "./components/pages/GenerateKidName/GenerateKidName"
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
 import getCsvData from "./components/functions/GetCsvData";
+import NavBar from "./components/common/header/navbar/Navbar";
 
 function App() {
   const [maleArray, setMaleArray] = useState(1);
@@ -61,7 +61,14 @@ function App() {
   return (
     <>
       <header>
-        <AppBarHeader />
+        <NavBar
+          pages={[
+            "Strona główna",
+            "Twoje imie",
+            "Najpopularniejsze imiona",
+            "Generator imion dla dzieci",
+          ]}
+        />
       </header>
       <main>
         <Container fixed>
