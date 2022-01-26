@@ -19,7 +19,7 @@ export default function NavBar({ pages }) {
           <i className="fa fa-bars"></i>
         </label>
         <div
-          className="logo"
+          className="logo "
           onClick={() => {
             document
               .querySelector(".link--active")

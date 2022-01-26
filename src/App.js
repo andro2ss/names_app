@@ -8,6 +8,7 @@ import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
 import getCsvData from "./components/functions/GetCsvData";
 import NavBar from "./components/common/header/navbar/Navbar";
+import Footer from "./components/common/footer/Footer";
 
 function App() {
   const [maleArray, setMaleArray] = useState(1);
@@ -93,6 +94,7 @@ function App() {
           </Routes>
         </div>
       </main>
+      <Footer />
     </>
   );
 }
