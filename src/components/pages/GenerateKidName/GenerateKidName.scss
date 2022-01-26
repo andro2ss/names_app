@@ -1,9 +1,21 @@
 .generateKidName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .title {
+    align-self: center;
+    text-align: center;
+    border-bottom: 2px dashed black;
+    padding-bottom: 5px;
+    width: 100%
+  }
 
   .generateKidName__container {
+    margin-top: 30px;
     display: flex;
     column-gap: 100px;
-    justify-content: space-between;
+    justify-content: space-around;
+    //width: 100%;
 
     .generateKidName__table {
       max-width: 50vw;

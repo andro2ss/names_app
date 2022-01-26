@@ -19,7 +19,7 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { createTableData } from "../../functions/CreateTableData";
-import RangeFilterForTable from "../../functions/RangeFilterForTable";
+import rangeFilterForTable from "../../functions/RangeFilterForTable";
 import { Spinner } from "./Spinner";
 
 export default function BasicTable({
@@ -94,8 +94,8 @@ export default function BasicTable({
             {rows
               .filter((row, index) => {
                 return (
-                  index >= RangeFilterForTable(rows, rangeFilter)[0] &&
-                  index <= RangeFilterForTable(rows, rangeFilter)[1]
+                  index >= rangeFilterForTable(rows, rangeFilter)[0] &&
+                  index <= rangeFilterForTable(rows, rangeFilter)[1]
                 );
               })
               .sort((a, b) => {
@@ -140,8 +140,8 @@ export default function BasicTable({
                 rowsPerPageOptions={[5, 10, 20]}
                 colSpan={3}
                 count={
-                  RangeFilterForTable(rows, rangeFilter)[1] -
-                  RangeFilterForTable(rows, rangeFilter)[0] +
+                  rangeFilterForTable(rows, rangeFilter)[1] -
+                  rangeFilterForTable(rows, rangeFilter)[0] +
                   1
                 }
                 rowsPerPage={rowsPerPage}
