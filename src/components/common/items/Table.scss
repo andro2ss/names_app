@@ -1,0 +1,15 @@
+
+.cell__content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 32px;
+  cursor: pointer;
+}
+
+.name {
+  justify-content: flex-start;
+  min-width: 105px;
+}
+

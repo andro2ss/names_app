@@ -7,7 +7,7 @@
   padding: 3%;
   max-height: 400px;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
 
   .form__title {
     padding: 16px 0;
@@ -15,11 +15,11 @@
     font-size: 28px;
   }
 
-  .form__text{
+  .form__text {
 
   }
 
-  .slider__desc{
+  .slider__desc {
     display: flex;
     justify-content: space-between;
     max-width: 300px;
@@ -34,5 +34,8 @@
     border-radius: 0;
     border: none;
     border-bottom: 2px dashed #224fac;
+    width: 100%;
+    padding-bottom: 50px;
+
   }
 }

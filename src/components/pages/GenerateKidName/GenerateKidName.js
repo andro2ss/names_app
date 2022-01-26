@@ -51,6 +51,7 @@ function GenerateKidName() {
               counters={[counterBoy, counterGirl]}
               selectedArr={selectedArr}
               rangeFilter={rangeFilter}
+              valueToFixed={5}
             />
           </div>
         </div>

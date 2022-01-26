@@ -43,6 +43,7 @@ function TopNames({ status, arrays, counters }) {
               counters={counters}
               selectedArr={0}
               rangeFilter={[0, 100]}
+              valueToFixed={7}
             />
           </div>
           <div className="table">
@@ -52,6 +53,7 @@ function TopNames({ status, arrays, counters }) {
               counters={counters}
               selectedArr={1}
               rangeFilter={[0, 100]}
+              valueToFixed={7}
             />
           </div>
         </div>

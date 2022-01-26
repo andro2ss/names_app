@@ -21,6 +21,7 @@ import { useTheme } from "@mui/material/styles";
 import { createTableData } from "../../functions/CreateTableData";
 import rangeFilterForTable from "../../functions/RangeFilterForTable";
 import { Spinner } from "./Spinner";
+import "./Table.scss";
 
 export default function BasicTable({
   status,
@@ -28,6 +29,7 @@ export default function BasicTable({
   counters,
   selectedArr,
   rangeFilter,
+  valueToFixed,
 }) {
   const [sortTable, setSortTable] = useState("quantityDown");
   const [page, setPage] = useState(0);
@@ -61,7 +63,16 @@ export default function BasicTable({
         return (
           <TableHead>
             <TableRow>
-              <TableCell>Imię</TableCell>
+              <TableCell
+                onClick={() => {
+                  sortName();
+                }}
+              >
+                <div className="cell__content name">
+                  Imię{sortTable === "nameDown" && <ArrowDownwardIcon />}
+                  {sortTable === "nameUp" && <ArrowUpwardIcon />}
+                </div>
+              </TableCell>
               <TableCell
                 className="tHead"
                 onClick={() => {
@@ -69,9 +80,11 @@ export default function BasicTable({
                 }}
                 align="right"
               >
-                Ilość
-                {sortTable === "quantityDown" && <ArrowDownwardIcon />}
-                {sortTable === "quantityUp" && <ArrowUpwardIcon />}
+                <div className="cell__content">
+                  {sortTable === "quantityDown" && <ArrowDownwardIcon />}
+                  {sortTable === "quantityUp" && <ArrowUpwardIcon />}
+                  Ilość
+                </div>
               </TableCell>
               <TableCell
                 className="tHead"
@@ -79,9 +92,15 @@ export default function BasicTable({
                   sortPercentage();
                 }}
                 align="right"
+                justify="center"
+                item="center"
+                width="30"
               >
-                %{sortTable === "percentageDown" && <ArrowDownwardIcon />}
-                {sortTable === "percentageUp" && <ArrowUpwardIcon />}
+                {" "}
+                <div className="cell__content">
+                  {sortTable === "percentageDown" && <ArrowDownwardIcon />}
+                  {sortTable === "percentageUp" && <ArrowUpwardIcon />}%
+                </div>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -107,6 +126,10 @@ export default function BasicTable({
                   return a.namePercentage - b.namePercentage;
                 } else if (sortTable === "percentageDown") {
                   return b.namePercentage - a.namePercentage;
+                } else if (sortTable === "nameDown") {
+                  return a.name.localeCompare(b.name);
+                } else if (sortTable === "nameUp") {
+                  return b.name.localeCompare(a.name);
                 }
                 return 0;
               })
@@ -126,7 +149,9 @@ export default function BasicTable({
                     {row.name}
                   </TableCell>
                   <TableCell align="right">{row.nameQuantity}</TableCell>
-                  <TableCell align="right">{row.namePercentage}</TableCell>
+                  <TableCell align="right">
+                    {parseFloat(row.namePercentage).toFixed(valueToFixed)}
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
@@ -137,6 +162,7 @@ export default function BasicTable({
           <TableFooter>
             <TableRow>
               <TablePagination
+                className="table__footer"
                 rowsPerPageOptions={[5, 10, 20]}
                 colSpan={3}
                 count={
@@ -169,7 +195,15 @@ export default function BasicTable({
       );
     }
   }
-
+  function sortName() {
+    if (sortTable === "nameDown") {
+      setSortTable("nameUp");
+    } else if (sortTable === "nameUp") {
+      setSortTable("nameDown");
+    } else {
+      setSortTable("nameDown");
+    }
+  }
   function sortQuantity() {
     if (sortTable === "quantityDown") {
       setSortTable("quantityUp");
