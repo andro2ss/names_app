@@ -35,7 +35,7 @@ function GenerateKidName() {
   return (
     <>
       <div className="generateKidName">
-        <h2>Znajdź imię dla swojej pociechy</h2>{" "}
+        <h2 className="title">Znajdź imię dla swojej pociechy</h2>{" "}
         <div className="generateKidName__container">
           <KidNameForm
             setSelectedArr={setSelectedArr}
@@ -51,6 +51,7 @@ function GenerateKidName() {
               counters={[counterBoy, counterGirl]}
               selectedArr={selectedArr}
               rangeFilter={rangeFilter}
+              valueToFixed={5}
             />
           </div>
         </div>

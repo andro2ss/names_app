@@ -17,12 +17,11 @@ export default function RangeSlider({ rangeFilter, setRangeFilter }) {
   };
 
   return (
-    <Box sx={{ width: 300 }}>
+    <Box sx={{ maxWidth: 300 }}>
       <Slider
         getAriaLabel={() => "Table scope"}
         value={tempRangeFilter}
         onChange={handleChange}
-        valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         onMouseUp={() => handleMouseUp()}
       />
