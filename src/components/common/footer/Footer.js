@@ -32,7 +32,7 @@ function Footer() {
                 );
             }}
           >
-            Name Info
+            Names Info
           </Link>
           <p>Made by Adrian Brzeski</p>
         </div>
