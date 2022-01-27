@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BasicTable from "../../common/items/Table";
 import KidNameForm from "./items/KidNameForm";
 import "./GenerateKidName.scss";
-import SaveDataApi from "../../functions/SaveDataAPI";
+import SaveDataApi from "../../../functions/SaveDataAPI";
 
 function GenerateKidName() {
   const [progressStatus, setProgressStatus] = useState(0);
