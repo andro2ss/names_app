@@ -2,7 +2,7 @@ import "./NavBar.scss";
 import * as React from "react";
 import MainLogo from "../mainLogo/MainLogo";
 import { Link } from "react-router-dom";
-import uniId from "../../../functions/UniqeID";
+import uniId from "../../../../functions/UniqeID";
 import { useState } from "react";
 
 export default function NavBar({ pages }) {
@@ -43,6 +43,8 @@ export default function NavBar({ pages }) {
                 to={
                   page.replace(/\s+/g, "") === "Stronagłówna"
                     ? "/"
+                    : page.replace(/\s+/g, "") === "Twojeimię"
+                    ? "Twojeimie"
                     : page.replace(/\s+/g, "")
                 }
               >
