@@ -12,6 +12,7 @@
     border-bottom-left-radius: 110px 19px;
     border-bottom-right-radius: 120px 24px;
     display: flex;
+    //flex-grow: 1;
     flex-direction: column;
     position: relative;
     border: solid 3px #6e7491;
@@ -26,6 +27,7 @@
 
   .main-nav {
     list-style-type: none;
+    flex-grow: 1;
     display: none;
     padding: 0;
   }
@@ -39,7 +41,7 @@
 
   .main-nav li {
     text-align: center;
-    margin: 15px auto;
+    //margin: 15px auto;
   }
 
   .logo {
