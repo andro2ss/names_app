@@ -18,8 +18,8 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
-import { createTableData } from "../../functions/CreateTableData";
-import rangeFilterForTable from "../../functions/RangeFilterForTable";
+import { createTableData } from "../../../functions/CreateTableData";
+import rangeFilterForTable from "../../../functions/RangeFilterForTable";
 import { Spinner } from "./Spinner";
 import "./Table.scss";
 
