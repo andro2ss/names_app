@@ -6,7 +6,7 @@ import YourName from "./components/pages/YourName/YourName";
 import GenerateKidName from "./components/pages/GenerateKidName/GenerateKidName";
 import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
-import getCsvData from "./components/functions/GetCsvData";
+import getCsvData from "./functions/GetCsvData";
 import NavBar from "./components/common/header/navbar/Navbar";
 import Footer from "./components/common/footer/Footer";
 
@@ -65,7 +65,7 @@ function App() {
         <NavBar
           pages={[
             "Strona główna",
-            "Twoje imie",
+            "Twoje imię",
             "Najpopularniejsze imiona",
             "Generator imion dla dzieci",
           ]}
