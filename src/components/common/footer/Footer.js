@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer__box">
-        <div className="footer--right">
+        <div className="footer__right--container">
           <a
             href="https://www.linkedin.com/in/adrian-brzeski-4156aa175/"
             target="_blank"
@@ -17,7 +17,7 @@ function Footer() {
             <i className="fab fa-github fa-2x"></i>{" "}
           </a>
         </div>
-        <div className="footer--left">
+        <div className="footer__left--container">
           <Link
             className="footer__logo"
             to="/"
