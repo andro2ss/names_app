@@ -3,8 +3,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import RowRadioButtonsGroup from "../../../common/items/RowRadioButtonsGroup";
-import { correctNameWrite } from "../../../functions/CorrectNameWrite";
-import { textFieldValidation } from "../../../functions/TextFieldValidation";
+import { correctNameWrite } from "../../../../functions/CorrectNameWrite";
+import { textFieldValidation } from "../../../../functions/TextFieldValidation";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./YourNameForm.scss";
 

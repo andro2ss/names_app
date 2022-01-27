@@ -1,4 +1,4 @@
-import { drawItem } from "../../../functions/DrawItem";
+import { drawItem } from "../../../../functions/DrawItem";
 import Stack from "@mui/material/Stack";
 import React from "react";
 import "./YourNameStack.scss";
