@@ -52,7 +52,7 @@ function YourName({ status, arrays, counters }) {
               <span className="box__text">
                 Czekamy na{" "}
                 <span className="box__text--animated animate__animated animate__flash animate__slow animate__infinite">
-                  IMIE
+                  IMIĘ
                 </span>
               </span>
             </span>
