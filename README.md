@@ -20,6 +20,7 @@ https://namesapp-abr.web.app/
 Project is created with:
 * React
 * MUI
+* Sass
 
 ## Setup
 To run this project, install it locally using npm:
