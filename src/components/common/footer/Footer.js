@@ -7,10 +7,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer__box">
         <div className="footer__right--container">
-          <a
-            href="https://www.linkedin.com/in/adrian-brzeski-4156aa175/"
-            target="_blank"
-          >
+          <a href="https://www.linkedin.com/in/adrian-brzeski/" target="_blank">
             <i className="fab fa-linkedin fa-2x"></i>
           </a>
           <a href="https://github.com/andro2ss/names_app" target="_blank">
