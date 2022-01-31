@@ -13,7 +13,7 @@ function Footer() {
           >
             <i className="fab fa-linkedin fa-2x"></i>
           </a>
-          <a href="https://github.com/andro2ss" target="_blank">
+          <a href="https://github.com/andro2ss/names_app" target="_blank">
             <i className="fab fa-github fa-2x"></i>{" "}
           </a>
         </div>
